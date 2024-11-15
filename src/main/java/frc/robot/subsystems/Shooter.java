@@ -23,6 +23,9 @@ public class Shooter {
     }
     private TalonFX shooterTopM;
     private TalonFX shooterBottomM;
-    
+
+    shooterBottomM.setInverted(False);
+
+
 
 }
