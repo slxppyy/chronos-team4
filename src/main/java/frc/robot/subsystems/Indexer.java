@@ -15,5 +15,54 @@ public class Indexer extends SubsystemBase{
     private TalonFX indexerLeaderM;
     private TalonFX indexerFollowerM;
     
+<<<<<<< Updated upstream
+=======
+    private Follower follow = new Follower(Constants.leftIndexer, false);
+    
+    public Indexer() {
+        indexerLeaderM = new TalonFX(Constants.leftIndexer);
+        indexerFollowerM = new TalonFX(Constants.rightIndexer);
+        indexerLeaderM.setInverted(true);
+        indexerFollowerM.setControl(follow);
+    }
+    //private ColorSensorV3 colorSensor;
+    
+    public enum IndexerStates {
+        ON(.6),
+        SHOOTING(.8),
+        AMP(.7),
+        ONAUTO(.32),
+        OFF(0),
+        REV(-8);
+
+        private double speed;
+
+        public double getValue() {
+            return speed;
+        }
+
+        IndexerStates(double speed) {
+            this.speed = speed;
+        }
+    }
+
+    public void setSpeed(double percentageOutput) {
+        indexerLeaderM.set(percentageOutput);
+    }
+
+    public void setState(IndexerStates state) {
+        indexerLeaderM.set(state.speed);
+        indexerFollowerM.setControl(follow);
+    }
+
+    public double getMotorVoltage() {
+        return indexerLeaderM.getMotorVoltage().getValueAsDouble();
+    }
+
+    public double getMotorCurrent() {
+        return indexerLeaderM.getTorqueCurrent().getValueAsDouble();
+    }
+    
+>>>>>>> Stashed changes
 
 }
