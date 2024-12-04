@@ -14,6 +14,6 @@ public class Indexer extends SubsystemBase{
 
     private TalonFX indexerLeaderM;
     private TalonFX indexerFollowerM;
+    
 
-    //private Follower follow = new Follower(Constants.HardwarePorts.indexerTopM, false);
 }
