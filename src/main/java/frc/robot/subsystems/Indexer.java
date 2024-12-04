@@ -27,8 +27,65 @@ public class Indexer extends SubsystemBase{
     private TalonFX indexerLeaderM;
     private TalonFX indexerFollowerM;
     
+<<<<<<< Updated upstream
     private Follower follow = new Follower(Constants.rightIndexer, false);
     
     //private ColorSensorV3 colorSensor;
+=======
+    private Follower follow = new Follower(Constants.HardwarePorts.leftIndexer, false);
+    
+    public Indexer() {
+        indexerLeaderM = new TalonFX(Constants.HardwarePorts.leftIndexer);
+        indexerFollowerM = new TalonFX(Constants.HardwarePorts.rightIndexer);
+        indexerLeaderM.setInverted(true);
+        indexerFollowerM.setControl(follow);
+    }
+    //private ColorSensorV3 colorSensor;
 
+    public enum IndexerStates {
+        ON(.6),
+        SHOOTING(.8),
+        AMP(.7),
+        ONAUTO(.32),
+        OFF(0),
+        REV(-8);
+
+        private double speed;
+
+        public double getValue() {
+            return speed;
+        }
+
+        IndexerStates(double speed) {
+            this.speed = speed;
+        }
+    }
+
+    public void setSpeed(double percentageOutput) {
+        indexerLeaderM.set(percentageOutput);
+    }
+
+    public void setState(IndexerStates state) {
+        indexerLeaderM.set(state.speed);
+        indexerFollowerM.setControl(follow);
+    }
+
+    public double getMotorVoltage() {
+        return indexerLeaderM.getMotorVoltage().getValueAsDouble();
+    }
+
+    public double getMotorCurrent() {
+        return indexerLeaderM.getTorqueCurrent().getValueAsDouble();
+    }
+    
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("indexer/Indexer Motor Current", getMotorCurrent());
+    }
+>>>>>>> Stashed changes
+
+    @Override
+    public void simulationPeriodic() {
+        
+    }
 }
