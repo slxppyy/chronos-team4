@@ -10,9 +10,38 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+//import frc.robot.Constants;
 
 public class Intake {
     private static Intake instance;
+    public static Intake getInstance() {
+        if (instance == null) {
+            synchronized (Intake.class) {
+                instance = new Intake();               
+            }
+        }
+        return instance;
+    }
     
+}
+
+
+private void configMotor() {}
+
+
+public enum IntakeStates {}
+
+public double getIntakeVoltage() {
+
+}
+
+public void setIntakeSpeed() {
+    
+}
+
+
+
+@Override
+public void periodic() {
+
 }
