@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 
-//import com.revrobotics.ColorSensorV3;
 
 
 import com.ctre.phoenix6.controls.Follower;
@@ -73,4 +72,11 @@ public class Indexer extends SubsystemBase{
         return indexerLeaderM.getTorqueCurrent().getValueAsDouble();
     }
 
+    @Override
+    public void periodic(){
+        SmartDashboard.putNumber("Indexer/Indexer Motor Current", getMotorCurrent());
+    }
+
+    @Override
+    public void simulationPeriodic() {}
 }
