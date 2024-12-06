@@ -21,6 +21,7 @@ public class RobotContainer {
 
   public static final double translationDeadband = 0.1;
   public static final double rotDeadband = 0.1;
+<<<<<<< Updated upstream
   
   private final Trigger driverBack = driver.back();
   private final Trigger driverStart = driver.start();
@@ -40,6 +41,9 @@ public class RobotContainer {
   public CommandXboxController getDriverController(){
     return driver;
   }
+=======
+
+>>>>>>> Stashed changes
 
   private void configureBindings() {
 
