@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.ShooterConstants;
+import frc.robot.Constants;
 
 
 public class Indexer extends SubsystemBase{
@@ -25,15 +25,15 @@ public class Indexer extends SubsystemBase{
     private TalonFX indexerLeaderM;
     private TalonFX indexerFollowerM;
     
-    private Follower follow = new Follower(ShooterConstants.HardwarePorts.indexerBottomM, false);
+    private Follower follow = new Follower(Constants.HardwarePorts.indexerBottomM, false);
     
     private ColorSensorV3 colorSensor;
     private DigitalInput limitSwitch = new DigitalInput(0);
     private static final I2C.Port onboardI2C = I2C.Port.kOnboard;
 
     public Indexer() {
-        indexerLeaderM = new TalonFX(ShooterConstants.HardwarePorts.indexerTopM);
-        indexerFollowerM = new TalonFX(ShooterConstants.HardwarePorts.indexerBottomM);
+        indexerLeaderM = new TalonFX(Constants.HardwarePorts.indexerTopM);
+        indexerFollowerM = new TalonFX(Constants.HardwarePorts.indexerBottomM);
         indexerLeaderM.setInverted(true);
         indexerFollowerM.setControl(follow);
     }

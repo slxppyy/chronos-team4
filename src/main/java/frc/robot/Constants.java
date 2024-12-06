@@ -1,6 +1,6 @@
 package frc.robot;
 
-public final class ShooterConstants {
+public final class Constants {
     public static final class HardwarePorts {
         public static final int shooterBottomM = 50;
         public static final int shooterTopM = 51;
@@ -20,5 +20,9 @@ public final class ShooterConstants {
         public static final int pivotCANcoderID = 42;
 
         public static final int ampM = 62;
+    }
+    public static final class DriveConstants {
+        public static final double MaxSpeed = 6;
+        public static double MaxAngularRate = 3 * Math.PI;
     }
 }
