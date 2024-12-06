@@ -1,6 +1,18 @@
 package frc.robot.subsystems;
+
+
+//import com.revrobotics.ColorSensorV3;
+
+
+import com.ctre.phoenix6.controls.Follower;
+
 import com.ctre.phoenix6.hardware.TalonFX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.ShooterConstants;
 
 
 public class Indexer extends SubsystemBase{
@@ -15,13 +27,11 @@ public class Indexer extends SubsystemBase{
     private TalonFX indexerLeaderM;
     private TalonFX indexerFollowerM;
     
-<<<<<<< Updated upstream
-=======
-    private Follower follow = new Follower(Constants.leftIndexer, false);
+    private Follower follow = new Follower(ShooterConstants.HardwarePorts.indexerBottomM, false);
     
     public Indexer() {
-        indexerLeaderM = new TalonFX(Constants.leftIndexer);
-        indexerFollowerM = new TalonFX(Constants.rightIndexer);
+        indexerLeaderM = new TalonFX(ShooterConstants.HardwarePorts.indexerTopM);
+        indexerFollowerM = new TalonFX(ShooterConstants.HardwarePorts.indexerBottomM);
         indexerLeaderM.setInverted(true);
         indexerFollowerM.setControl(follow);
     }
@@ -62,7 +72,5 @@ public class Indexer extends SubsystemBase{
     public double getMotorCurrent() {
         return indexerLeaderM.getTorqueCurrent().getValueAsDouble();
     }
-    
->>>>>>> Stashed changes
 
 }
