@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 
 //import com.revrobotics.ColorSensorV3;
 
+import com.revrobotics.ColorSensorV3;
 
 import com.ctre.phoenix6.controls.Follower;
 
@@ -39,6 +40,21 @@ public class Indexer extends SubsystemBase{
     }
     //private ColorSensorV3 colorSensor;
 
+    
+    private Follower follow = new Follower(Constants.HardwarePorts.indexerBottomM, false);
+    
+    private ColorSensorV3 colorSensor;
+    private DigitalInput limitSwitch = new DigitalInput(0);
+    private static final I2C.Port onboardI2C = I2C.Port.kOnboard;
+
+    public Indexer() {
+        indexerLeaderM = new TalonFX(Constants.HardwarePorts.indexerTopM);
+        indexerFollowerM = new TalonFX(Constants.HardwarePorts.indexerBottomM);
+        indexerLeaderM.setInverted(true);
+        indexerFollowerM.setControl(follow);
+    }
+    
+    
     public enum IndexerStates {
         ON(.6),
         SHOOTING(.8),
@@ -67,6 +83,10 @@ public class Indexer extends SubsystemBase{
         indexerFollowerM.setControl(follow);
     }
 
+    public int getColorSensorResult() {
+        return colorSensor.getProximity();
+    }
+
     public double getMotorVoltage() {
         return indexerLeaderM.getMotorVoltage().getValueAsDouble();
     }
@@ -84,4 +104,13 @@ public class Indexer extends SubsystemBase{
     public void simulationPeriodic() {
         
     }
+
+    @Override
+    public void periodic(){
+        SmartDashboard.putNumber("Indexer/Color Sensor Proximity", getColorSensorResult());
+        SmartDashboard.putNumber("Indexer/Indexer Motor Current", getMotorCurrent());
+    }
+
+    @Override
+    public void simulationPeriodic() {}
 }

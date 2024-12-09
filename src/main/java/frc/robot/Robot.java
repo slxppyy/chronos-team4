@@ -5,13 +5,25 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Indexer;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
   private RobotContainer m_robotContainer;
+
+  private final Indexer s_Indexer;
+  //private final Shooter s_Shooter;
+  //private final Intake s_Intake;
+
+  public Robot() {
+    super();
+    s_Indexer = Indexer.getInstance();
+    //s_Shooter = Shooter.getInstance();
+    //s_Intake = Intake.getInstance();
+  }
 
   @Override
   public void robotInit() {

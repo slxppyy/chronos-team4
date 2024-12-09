@@ -32,6 +32,34 @@ public class RobotContainer {
   .withDeadband(Constants.DriveConstants.MaxSpeed * translationDeadband).withRotationalDeadband(Constants.DriveConstants.MaxAngularRate * rotDeadband)
   .withDriveRequestType(DriveRequestType.OpenLoopVoltage);  
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.*;
+import frc.robot.subsystems.Indexer.IndexerStates;
+import frc.robot.commands.SetIndexer;
+import frc.robot.commands.CommandFactory;
+
+public class RobotContainer {
+  private static volatile RobotContainer container;
+
+  public static RobotContainer getInstance() {
+    if(container == null) {
+      synchronized(RobotContainer.class) {
+        if(container == null){
+          container = new RobotContainer();
+        }
+      }
+    }
+      return container;
+  }
+  public final CommandXboxController driver = new CommandXboxController(0);
+  
+  private final Indexer s_Indexer = Indexer.getInstance();
+  
+  //private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
+  //.withDeadband(Constants.DriveConstants.MaxSpeed * translationDeadband).withRotationalDeadband(Constants.DriveConstants.MaxAngularRate * rotDeadband)
+  //.withDriveRequestType(DriveRequestType.OpenLoopVoltage);  
+
   public static final double translationDeadband = 0.1;
   public static final double rotDeadband = 0.1;
 
@@ -51,6 +79,7 @@ public class RobotContainer {
   private final Trigger driverDpadLeft = driver.povLeft();
   private final Trigger driverDpadRight = driver.povRight();
   
+
   public CommandXboxController getDriverController(){
     return driver;
   }
@@ -58,11 +87,24 @@ public class RobotContainer {
 
   private void configureBindings() {
 
-
   }
 
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");
+  }
+  private void configureBindings() {
+    driver.a().onTrue(CommandFactory.offEverything());
+    driver.b().onTrue(CommandFactory.eject());
+    driver.y().whileTrue(new SetIndexer(IndexerStates.SHOOTING));
+
+  }
+
+  public Command getAutonomousCommand() {
+    return Commands.print("No autonomous command configured");
+  }
+
+  public RobotContainer() {
+    configureBindings();
   }
 }
