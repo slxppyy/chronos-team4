@@ -19,7 +19,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.*;
 import frc.robot.subsystems.Indexer.IndexerStates;
+import frc.robot.commands.SetIndexer;
+import frc.robot.commands.CommandFactory;
 
 public class RobotContainer {
   private static volatile RobotContainer container;
@@ -37,10 +40,10 @@ public class RobotContainer {
   public final CommandXboxController driver = new CommandXboxController(0);
   
   private final Indexer s_Indexer = Indexer.getInstance();
-
-  private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-  .withDeadband(Constants.DriveConstants.MaxSpeed * translationDeadband).withRotationalDeadband(Constants.DriveConstants.MaxAngularRate * rotDeadband)
-  .withDriveRequestType(DriveRequestType.OpenLoopVoltage);  
+  
+  //private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
+  //.withDeadband(Constants.DriveConstants.MaxSpeed * translationDeadband).withRotationalDeadband(Constants.DriveConstants.MaxAngularRate * rotDeadband)
+  //.withDriveRequestType(DriveRequestType.OpenLoopVoltage);  
 
   public static final double translationDeadband = 0.1;
   public static final double rotDeadband = 0.1;
@@ -66,14 +69,18 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    //driver.a().onTrue(CommandFactory.offEverything());
+    driver.a().onTrue(CommandFactory.offEverything());
     //driver.x().onTrue(new SmartInake());
-    //driver.b().onTrue(CommandFactory.eject());
-    //driver.y().whileTrue(new SetIndexer(IndexerStates.SHOOTING))
+    driver.b().onTrue(CommandFactory.eject());
+    driver.y().whileTrue(new SetIndexer(IndexerStates.SHOOTING));
 
   }
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");
+  }
+
+  public RobotContainer() {
+    configureBindings();
   }
 }
