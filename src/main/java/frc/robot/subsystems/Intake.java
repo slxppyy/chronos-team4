@@ -39,9 +39,4 @@ public void setIntakeSpeed() {
     
 }
 
-
-
-@Override
-public void periodic() {
-
 }
