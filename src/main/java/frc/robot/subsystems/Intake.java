@@ -49,7 +49,23 @@ private void configMotor(TalonFX motor) {
 }
 
 
-public enum IntakeStates {}
+public enum IntakeStates {
+    ON(0.45, 0.85),
+    OFF(0, 0),
+    REV(-0.4, -0.8);
+
+    private double speed;
+    private double serialSpeed;
+
+    public double getValue() {
+        return speed;
+    }
+
+    IntakeStates(double speed, double serialSpeed) {
+        this.speed = speed;
+        this.serialSpeed = serialSpeed;
+    }
+}
 
 public double getIntakeVoltage() {
 
