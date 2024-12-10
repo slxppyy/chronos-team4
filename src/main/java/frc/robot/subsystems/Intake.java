@@ -24,6 +24,8 @@ public class Intake {
     }
     
 }
+    
+    
 
 private TalonFX intakeMotor;
 
@@ -46,10 +48,10 @@ private void configMotor(TalonFX motor) {
     //slot0Configs.kD = Constants.SwerveConstants.driveKD;
     config.CurrentLimits = currentLimitsConfigs;
     motor.getConfigurator().apply(config);
-}
+    }
 
 
-public enum IntakeStates {
+    public enum IntakeStates {
     ON(0.45, 0.85),
     OFF(0, 0),
     REV(-0.4, -0.8);
@@ -65,19 +67,42 @@ public enum IntakeStates {
         this.speed = speed;
         this.serialSpeed = serialSpeed;
     }
-}
+    }
+    public void setSpeed(IntakeStates state) {
+    intakeMotor.setControl(dutyCycleRequest.withOutput(state.speed));
+    serialM.set(state.serialSpeed);
+    currentState = state;
+    }
+    private double currentIntakePercentage = Integer.MAX_VALUE;
 
-public double getIntakeVoltage() {
+    public void incPower() {
+        if (currentIntakePercentage == Integer.MAX_VALUE) {
+            if (currentState != null) {
+                currentIntakePercentage = currentState.speed;
+            }
+        }
+        currentIntakePercentage += 0.05;
+        intakeMotor.set(currentIntakePercentage);
+    }
 
-}
+    public void decPower() {
+        if (currentIntakePercentage == Integer.MAX_VALUE) {
+            if (currentState != null) {
+                currentIntakePercentage = currentState.speed;
+            }
+        }
+        currentIntakePercentage -= 0.05;
+        intakeMotor.set(currentIntakePercentage);
+    }
 
-public void setIntakeSpeed() {
+
     
-}
+    public void periodic() {
+        
+        SmartDashboard.putBoolean("Intake/Intake On", intakeMotor.getMotorVoltage().getValueAsDouble() > 2);
+    }
 
+    
+    public void simulationPeriodic() {
 
-
-@Override
-public void periodic() {
-
-}
+    }
