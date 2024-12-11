@@ -1,6 +1,8 @@
 package frc.robot;
 
 public final class Constants {
+    public static final int intakePeakCurrentLimit = 70;
+    public static final int intakeContinuousCurrentLimit = 30;
     public static final int frontLeftSteer = 1;
     public static final int frontLeftDrive = 2;
 
