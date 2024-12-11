@@ -9,9 +9,10 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Shooter {
+public class Shooter extends SubsystemBase{
     
     private static volatile Shooter instance;
     // search for thread safe instance getter on yt
