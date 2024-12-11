@@ -28,16 +28,8 @@ public class Indexer extends SubsystemBase{
     private TalonFX indexerLeaderM;
     private TalonFX indexerFollowerM;
 
-    private Follower follow = new Follower(Constants.rightIndexer, false);
-    
     //private ColorSensorV3 colorSensor;
     
-    public Indexer() {
-        indexerLeaderM = new TalonFX(Constants.leftIndexer);
-        indexerFollowerM = new TalonFX(Constants.rightIndexer);
-        indexerLeaderM.setInverted(true);
-        indexerFollowerM.setControl(follow);
-    }
     //private ColorSensorV3 colorSensor;
 
     
@@ -95,10 +87,6 @@ public class Indexer extends SubsystemBase{
         return indexerLeaderM.getTorqueCurrent().getValueAsDouble();
     }
     
-    @Override
-    public void periodic() {
-        SmartDashboard.putNumber("indexer/Indexer Motor Current", getMotorCurrent());
-    }
 
     @Override
     public void simulationPeriodic() {
@@ -111,6 +99,4 @@ public class Indexer extends SubsystemBase{
         SmartDashboard.putNumber("Indexer/Indexer Motor Current", getMotorCurrent());
     }
 
-    @Override
-    public void simulationPeriodic() {}
 }
