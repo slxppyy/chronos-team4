@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Indexer.IndexerStates;
+import frc.robot.subsystems.Intake.IntakeStates;
 import frc.robot.commands.*;
 
 
