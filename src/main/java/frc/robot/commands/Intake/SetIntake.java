@@ -20,6 +20,7 @@ public class SetIntake extends Command {
         s_Indexer = Indexer.getInstance();
 
 
+        
 
         addRequirements(s_Intake);
     }
@@ -31,7 +32,11 @@ public class SetIntake extends Command {
 
     @Override
     public void execute() {
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 789c03540f1cafe58078445e8648fec5453ae196
     }
 
     @Override
@@ -44,4 +49,8 @@ public class SetIntake extends Command {
         counter++;
         return counter % 200 == 0;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 789c03540f1cafe58078445e8648fec5453ae196
