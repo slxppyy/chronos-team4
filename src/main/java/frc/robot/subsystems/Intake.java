@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Intake {
+public class Intake extends SubsystemBase{
     private static Intake instance;
     public static Intake getInstance() {
         if (instance == null) {
@@ -23,7 +23,9 @@ public class Intake {
         return instance;
     }
     
-}
+
+private DutyCycleOut dutyCycleRequest = new DutyCycleOut(0);
+private IntakeStates currentState = IntakeStates.OFF;
     
     
 
@@ -59,50 +61,34 @@ private void configMotor(TalonFX motor) {
     private double speed;
     private double serialSpeed;
 
-    public double getValue() {
-        return speed;
+        public double getValue() {
+            return speed;
+        }
+
+        IntakeStates(double speed, double serialSpeed) {
+            this.speed = speed;
+            this.serialSpeed = serialSpeed;
+        }
+
     }
 
-    IntakeStates(double speed, double serialSpeed) {
-        this.speed = speed;
-        this.serialSpeed = serialSpeed;
-    }
-    }
     public void setSpeed(IntakeStates state) {
-    intakeMotor.setControl(dutyCycleRequest.withOutput(state.speed));
-    serialM.set(state.serialSpeed);
-    currentState = state;
+        intakeMotor.setControl(dutyCycleRequest.withOutput(state.speed));
+        //serialM.set(state.serialSpeed);
+        currentState = state;
     }
     private double currentIntakePercentage = Integer.MAX_VALUE;
 
-    public void incPower() {
-        if (currentIntakePercentage == Integer.MAX_VALUE) {
-            if (currentState != null) {
-                currentIntakePercentage = currentState.speed;
-            }
-        }
-        currentIntakePercentage += 0.05;
-        intakeMotor.set(currentIntakePercentage);
-    }
-
-    public void decPower() {
-        if (currentIntakePercentage == Integer.MAX_VALUE) {
-            if (currentState != null) {
-                currentIntakePercentage = currentState.speed;
-            }
-        }
-        currentIntakePercentage -= 0.05;
-        intakeMotor.set(currentIntakePercentage);
-    }
-
-
     
+
+
+    @Override
     public void periodic() {
         
         SmartDashboard.putBoolean("Intake/Intake On", intakeMotor.getMotorVoltage().getValueAsDouble() > 2);
     }
 
+}  
     
-    public void simulationPeriodic() {
 
-    }
+    
