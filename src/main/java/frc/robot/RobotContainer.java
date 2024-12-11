@@ -15,29 +15,13 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Indexer.IndexerStates;
+import frc.robot.commands.*;
 
-public class RobotContainer {
-  public RobotContainer() {
-    configureBindings();
-  }
-
-
-  private void configureBindings() {}
-
-  private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-  .withDeadband(Constants.DriveConstants.MaxSpeed * translationDeadband).withRotationalDeadband(Constants.DriveConstants.MaxAngularRate * rotDeadband)
-  .withDriveRequestType(DriveRequestType.OpenLoopVoltage);  
-
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.subsystems.Indexer.IndexerStates;
-import frc.robot.commands.SetIndexer;
-import frc.robot.commands.CommandFactory;
 
 public class RobotContainer {
   private static volatile RobotContainer container;
@@ -84,15 +68,6 @@ public class RobotContainer {
     return driver;
   }
 
-
-  private void configureBindings() {
-
-  }
-
-
-  public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
-  }
   private void configureBindings() {
     driver.a().onTrue(CommandFactory.offEverything());
     driver.b().onTrue(CommandFactory.eject());
@@ -100,9 +75,7 @@ public class RobotContainer {
 
   }
 
-  public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
-  }
+
 
   public RobotContainer() {
     configureBindings();
