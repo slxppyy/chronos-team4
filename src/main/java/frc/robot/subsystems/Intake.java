@@ -31,7 +31,7 @@ private IntakeStates currentState = IntakeStates.OFF;
 
 private TalonFX intakeMotor;
 
-private void configMotor(TalonFX motor) {
+private void configMotor(TalonFX motor) { 
 
 
     TalonFXConfiguration config = new TalonFXConfiguration();
@@ -42,6 +42,8 @@ private void configMotor(TalonFX motor) {
     currentLimitsConfigs.SupplyCurrentThreshold = Constants.intakePeakCurrentLimit;
     config.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 0.5;
+
+
     //config.OpenLoopRamps.
 
     //Slot0Configs slot0Configs = new Slot0Configs();
@@ -71,7 +73,7 @@ private void configMotor(TalonFX motor) {
         }
 
     }
-
+ 
     public void setSpeed(IntakeStates state) {
         intakeMotor.setControl(dutyCycleRequest.withOutput(state.speed));
         //serialM.set(state.serialSpeed);
