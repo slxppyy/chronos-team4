@@ -70,6 +70,8 @@ public class Indexer extends SubsystemBase{
         indexerLeaderM.set(percentageOutput);
     }
 
+    
+
     public void setState(IndexerStates state) {
         indexerLeaderM.set(state.speed);
         indexerFollowerM.setControl(follow);

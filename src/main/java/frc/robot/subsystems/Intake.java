@@ -31,6 +31,8 @@ private IntakeStates currentState = IntakeStates.OFF;
 private TalonFX intakeMotor;
 public Intake(){
     intakeMotor = new TalonFX(Constants.intake);
+    configMotor(intakeMotor);
+    intakeMotor.setInverted(false);
 }
 private void configMotor(TalonFX motor) {
 
@@ -55,7 +57,7 @@ private void configMotor(TalonFX motor) {
 
 
     public enum IntakeStates {
-    ON(0.45, 0.85),
+    ON(0.65, 0.85),
     OFF(0, 0),
     REV(-0.4, -0.8);
 
@@ -73,12 +75,11 @@ private void configMotor(TalonFX motor) {
 
     }
 
-    public void setSpeed(IntakeStates state) {
-        intakeMotor.setControl(dutyCycleRequest.withOutput(state.speed));
-        //serialM.set(state.serialSpeed);
-        currentState = state;
+
+    public void setSpeed(double percentageOutput) {
+        intakeMotor.set(percentageOutput);
     }
-    private double currentIntakePercentage = Integer.MAX_VALUE;
+
 
 
 }  

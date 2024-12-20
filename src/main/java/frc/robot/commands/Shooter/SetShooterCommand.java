@@ -15,16 +15,15 @@ public class SetShooterCommand extends Command {
     public SetShooterCommand(double velocity) {
         s_Shooter = Shooter.getInstance();
         
-
+        addRequirements(s_Shooter);
         velBot = velocity;
         velTop = velocity;
 
-        addRequirements(s_Shooter);
     }
 
     public SetShooterCommand(double velocityTop, double velocityBot){
         s_Shooter = Shooter.getInstance();
-        
+        addRequirements(s_Shooter);
 
         velTop = velocityTop;
         velBot = velocityBot;
@@ -48,8 +47,7 @@ public class SetShooterCommand extends Command {
 
     @Override
 	public boolean isFinished() {
-        double[] speeds = s_Shooter.getBothVelocities();
-        return Math.abs(speeds[0] - velTop) < 3 && Math.abs(speeds[1] - velBot) < 3;
+        return true;
 	}
 		
 	@Override
