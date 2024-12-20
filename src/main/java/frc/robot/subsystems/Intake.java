@@ -29,7 +29,9 @@ private IntakeStates currentState = IntakeStates.OFF;
     
 
 private TalonFX intakeMotor;
-
+public Intake(){
+    intakeMotor = new TalonFX(Constants.intake);
+}
 private void configMotor(TalonFX motor) {
 
 
@@ -77,10 +79,6 @@ private void configMotor(TalonFX motor) {
         currentState = state;
     }
     private double currentIntakePercentage = Integer.MAX_VALUE;
-
-    
-
-
 
 
 }  
