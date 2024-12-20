@@ -23,7 +23,7 @@ import frc.robot.subsystems.Indexer.IndexerStates;
 import frc.robot.commands.Indexer.SetIndexer;
 import frc.robot.subsystems.Intake.IntakeStates;
 import frc.robot.commands.Intake.SetIntake;
-
+import frc.robot.commands.Shooter.SetShooterCommand;
 
 
 
@@ -74,7 +74,7 @@ public class RobotContainer {
 
   private void configureBindings() {
     driver.a().onTrue(CommandFactory.offEverything());
-    driver.b().onTrue(CommandFactory.eject());
+    driver.b().onTrue(new SetShooterCommand(60));
     driver.y().whileTrue(new SetIndexer(IndexerStates.SHOOTING));
     driver.x().onTrue(new SetIntake(IntakeStates.ON));
   }

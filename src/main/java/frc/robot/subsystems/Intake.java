@@ -4,7 +4,6 @@ import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
-import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
@@ -31,7 +30,7 @@ private IntakeStates currentState = IntakeStates.OFF;
 
 private TalonFX intakeMotor;
 
-private void configMotor(TalonFX motor) { 
+private void configMotor(TalonFX motor) {
 
 
     TalonFXConfiguration config = new TalonFXConfiguration();
@@ -42,8 +41,6 @@ private void configMotor(TalonFX motor) {
     currentLimitsConfigs.SupplyCurrentThreshold = Constants.intakePeakCurrentLimit;
     config.MotorOutput.NeutralMode = NeutralModeValue.Coast;
     config.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = 0.5;
-
-
     //config.OpenLoopRamps.
 
     //Slot0Configs slot0Configs = new Slot0Configs();
@@ -73,7 +70,7 @@ private void configMotor(TalonFX motor) {
         }
 
     }
- 
+
     public void setSpeed(IntakeStates state) {
         intakeMotor.setControl(dutyCycleRequest.withOutput(state.speed));
         //serialM.set(state.serialSpeed);
@@ -84,11 +81,7 @@ private void configMotor(TalonFX motor) {
     
 
 
-    @Override
-    public void periodic() {
-        
-        SmartDashboard.putBoolean("Intake/Intake On", intakeMotor.getMotorVoltage().getValueAsDouble() > 2);
-    }
+
 
 }  
     
