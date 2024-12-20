@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Indexer.IndexerStates;
+import frc.robot.commands.Indexer.SetIndexer;
 
 public class CommandFactory {
     public static Command Diagnostic() {
