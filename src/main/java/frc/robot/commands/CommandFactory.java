@@ -5,6 +5,10 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Indexer.IndexerStates;
+import frc.robot.subsystems.Intake.IntakeStates;
+import frc.robot.commands.Indexer.SetIndexer;
+import frc.robot.commands.Intake.SetIntake;
+import frc.robot.commands.Shooter.SetShooterCommand;
 
 public class CommandFactory {
     public static Command Diagnostic() {
@@ -24,8 +28,10 @@ public class CommandFactory {
             new ParallelCommandGroup(
                 //new ZeroShooter(),
                 //new SetIntake(IntakeStates.OFF),
-                //Commands.waitSeconds(0.5),
-                new SetIndexer(IndexerStates.OFF)
+                Commands.waitSeconds(0.5),
+                new SetIndexer(IndexerStates.OFF),
+                new SetShooterCommand(0),
+                new SetIntake(IntakeStates.OFF)
             )
         );
     }
