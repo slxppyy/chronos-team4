@@ -8,16 +8,14 @@ import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-
-
-
-
-public class Shooter {
+public class Shooter extends SubsystemBase{
     
     private static volatile Shooter instance;
-//THREAD SAFE INSTANCE GETTER SEARCH ON YT 
+    // search for thread safe instance getter on yt
     public static Shooter getInstance(){
         if (instance == null) {
             synchronized(Shooter.class) {
@@ -47,16 +45,17 @@ public class Shooter {
         shooterLeftM = new TalonFX(Constants.rightShooter);
         shooterRightM = new TalonFX(Constants.leftShooter);
 
-        shooterLeftM.setInverted(false);
-        shooterRightM.setInverted(false);
+        // shooterLeftM.setInverted(false);
+        // shooterRightM.setInverted(true);
 
-        configMotor(shooterLeftM, 0.21, 0.122);
-        configMotor(shooterRightM, 0.362, 0.1225);
+        configMotor(shooterLeftM, 0.21, 0.122, true);
+        configMotor(shooterRightM, 0.362, 0.1225, false);
 
     }
-private void configMotor(TalonFX motor, double kS, double kV){
+private void configMotor(TalonFX motor, double kS, double kV, boolean Inverted){
     TalonFXConfiguration config = new TalonFXConfiguration();
-    config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    
+    config.MotorOutput.Inverted = Inverted ? InvertedValue.CounterClockwise_Positive : InvertedValue.Clockwise_Positive;
     config.MotorOutput.NeutralMode = NeutralModeValue.Coast; // Break or coast. When powered should the motor keep itself in place (brake) or allow itself to move freely (coast)
 
     CurrentLimitsConfigs currentLimitsConfigs = new CurrentLimitsConfigs();
