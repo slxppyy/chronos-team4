@@ -15,17 +15,17 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Indexer.IndexerStates;
-import frc.robot.CommandFactory;
+import frc.robot.commands.Indexer.SetIndexer;
+import frc.robot.subsystems.Intake.IntakeStates;
+import frc.robot.commands.Intake.SetIntake;
+import frc.robot.commands.Shooter.SetShooterCommand;
+import frc.robot.commands.CommandFactory;
 
-
-
-  //private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-  //.withDeadband(Constants.DriveConstants.MaxSpeed * translationDeadband).withRotationalDeadband(Constants.DriveConstants.MaxAngularRate * rotDeadband)
-  //.withDriveRequestType(DriveRequestType.OpenLoopVoltage);  
 
 
 public class RobotContainer {
@@ -72,12 +72,14 @@ public class RobotContainer {
   public CommandXboxController getDriverController(){
     return driver;
   }
+
   private void configureBindings() {
     driver.a().onTrue(CommandFactory.offEverything());
-    driver.b().onTrue(CommandFactory.eject());
+    driver.b().onTrue(new SetShooterCommand(60));
     driver.y().whileTrue(new SetIndexer(IndexerStates.SHOOTING));
-
+    driver.x().onTrue(new SetIntake(IntakeStates.ON));
   }
+
 
 
   public RobotContainer() {
