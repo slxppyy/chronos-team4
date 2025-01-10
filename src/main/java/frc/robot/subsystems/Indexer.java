@@ -14,7 +14,10 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.StructArrayPublisher;
+import edu.wpi.first.networktables.StructPublisher;
 
 public class Indexer extends SubsystemBase{
     private static Indexer instance;
@@ -46,7 +49,13 @@ public class Indexer extends SubsystemBase{
         indexerFollowerM.setControl(follow);
     }
     
-    
+    Pose2d poseA = new Pose2d();
+    Pose2d poseB = new Pose2d();
+    StructPublisher<Pose2d> publisher = NetworkTableInstance.getDefault()
+    .getStructTopic("MyPose", Pose2d.struct).publish();
+    StructArrayPublisher<Pose2d> arrayPublisher = NetworkTableInstance.getDefault()
+    .getStructArrayTopic("MyPoseArray", Pose2d.struct).publish();
+
     public enum IndexerStates {
         ON(.6),
         SHOOTING(.8),
