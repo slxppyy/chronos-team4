@@ -60,8 +60,8 @@ public class Swerve extends SubsystemBase {
         this::getSpeeds, 
         this::driveRobotRelative, 
         new PPHolonomicDriveController(
-          Constants.Swerve.translationConstants,
-          Constants.Swerve.rotationConstants
+          Constants.SwerveConstants.translationConstants,
+          Constants.SwerveConstants.rotationConstants, 20, 20
         ),
         config,
         () -> {

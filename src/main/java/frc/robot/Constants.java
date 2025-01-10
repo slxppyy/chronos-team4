@@ -1,7 +1,9 @@
 package frc.robot;
 
+import com.pathplanner.lib.util.PIDConstants;
+
 import edu.wpi.first.math.geometry.Translation2d;
-//import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.commands.*;
 
 public final class Constants {
     public static final int intakePeakCurrentLimit = 70;
@@ -60,10 +62,9 @@ public final class Constants {
     public static final Translation2d frModuleOffset = new Translation2d(0.546 / 2.0, -0.546 / 2.0);
     public static final Translation2d blModuleOffset = new Translation2d(-0.546 / 2.0, 0.546 / 2.0);
     public static final Translation2d brModuleOffset = new Translation2d(-0.546 / 2.0, -0.546 / 2.0);
-
+    
+    public static final PIDConstants translationConstants = new PIDConstants(5.0, 2.0, 2.0);
+    public static final PIDConstants rotationConstants = new PIDConstants(5.0, 2.0, 2.0);
     public static final double maxModuleSpeed = 4.5; // M/S
-
-    //public static final PIDConstants translationConstants = new PIDConstants(5.0, 0.0, 0.0);
-    //public static final PIDConstants rotationConstants = new PIDConstants(5.0, 0.0, 0.0);
   }
 }
