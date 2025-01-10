@@ -1,5 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
+//import com.pathplanner.lib.config.PIDConstants;
+
 public final class Constants {
     public static final int intakePeakCurrentLimit = 70;
     public static final int intakeContinuousCurrentLimit = 30;
@@ -52,4 +55,15 @@ public final class Constants {
         public static final double MaxSpeed = 6;
         public static double MaxAngularRate = 3 * Math.PI;
     }
+    public static final class SwerveConstants {
+    public static final Translation2d flModuleOffset = new Translation2d(0.546 / 2.0, 0.546 / 2.0);
+    public static final Translation2d frModuleOffset = new Translation2d(0.546 / 2.0, -0.546 / 2.0);
+    public static final Translation2d blModuleOffset = new Translation2d(-0.546 / 2.0, 0.546 / 2.0);
+    public static final Translation2d brModuleOffset = new Translation2d(-0.546 / 2.0, -0.546 / 2.0);
+
+    public static final double maxModuleSpeed = 4.5; // M/S
+
+    //public static final PIDConstants translationConstants = new PIDConstants(5.0, 0.0, 0.0);
+    //public static final PIDConstants rotationConstants = new PIDConstants(5.0, 0.0, 0.0);
+  }
 }
