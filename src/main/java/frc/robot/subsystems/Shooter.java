@@ -9,6 +9,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -207,6 +208,20 @@ public double[] getBothVelocities() {
         return Math.abs(averageError) < acceptableError;
     }
 
+    public double getTopMotorCurrent(){
+        return shooterLeftM.getTorqueCurrent().getValueAsDouble();
+    }
+
+    
+    public double getBottomMotorCurrent(){
+        return shooterRightM.getTorqueCurrent().getValueAsDouble();
+    }
+
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Shooter/Shooter Speed", getTopMotorCurrent());
+        SmartDashboard.putNumber("Shooter/Shooter Speed", getBottomMotorCurrent());
+    }
 
 }
 

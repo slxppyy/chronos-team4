@@ -64,7 +64,7 @@ private void configMotor(TalonFX motor) {
     private double speed;
     private double serialSpeed;
 
-        public double getValue() {
+        public double getSpeed() {
             return speed;
         }
 
@@ -80,7 +80,14 @@ private void configMotor(TalonFX motor) {
         intakeMotor.set(percentageOutput);
     }
 
+    public double getMotorCurrent(){
+        return intakeMotor.getTorqueCurrent().getValueAsDouble();
+    }
 
+    @Override
+    public void periodic(){
+        SmartDashboard.putNumber("Intake/Intake Speed", getMotorCurrent());
+    }
 
 }  
     

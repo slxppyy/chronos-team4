@@ -19,7 +19,7 @@ public class SetIntake extends Command {
     @Override
     public void initialize() {
         System.out.println("INTAKE");
-        s_Intake.setSpeed(state.getValue());
+        s_Intake.setSpeed(state.getSpeed());
     }
     
     @Override
